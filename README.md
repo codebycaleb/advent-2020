@@ -6,7 +6,8 @@ More realistic goal: optimize problems to run in less than 1 minute.
 
 # Most recent stats:
 ```
-Problem  1:     5057 μs (866436, 276650720)
+Problem  1:     5769 μs (866436, 276650720)
+Problem  2:     6562 μs (542, 360)
 -------------------
-Total:          5057 μs
+Total:         12331 μs
 ```

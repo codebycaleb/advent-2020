@@ -1,5 +1,4 @@
 defmodule Expected do
   def values,
-    do: %{
-    }
+    do: %{}
 end

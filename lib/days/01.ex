@@ -26,14 +26,15 @@ defmodule D1 do
   @behaviour Day
 
   defp find(input, against) do
-    diffs = against |> Enum.map(&(2020 - &1)) |> MapSet.new
+    diffs = against |> Enum.map(&(2020 - &1)) |> MapSet.new()
     matches = MapSet.intersection(input, diffs)
     Enum.reduce(matches, &(&1 * &2))
   end
 
+  @impl true
   def solve(input) do
-    input = input |> Utils.to_ints |> MapSet.new
-    sums =  for i <- input, j <- input, i + j < 2020 and i != j, do: i + j
+    input = input |> Utils.to_ints() |> MapSet.new()
+    sums = for i <- input, j <- input, i + j < 2020 and i != j, do: i + j
 
     part_1 = find(input, input)
     part_2 = find(input, sums)

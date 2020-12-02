@@ -153,7 +153,7 @@ defmodule Utils do
       end)
 
     edges = lr_edges ++ ud_edges
-    g = Graph.add_edges(Graph.new, edges)
+    g = Graph.add_edges(Graph.new(), edges)
     h = Graph.transpose(g)
     Graph.add_edges(g, Graph.edges(h))
   end
