@@ -26,28 +26,31 @@ defmodule D2 do
 
   @impl true
   def solve(input) do
-    input = input
-    |> Utils.to_strings()
-    |> Enum.map(&Regex.run(@regex, &1, capture: :all_but_first))
-    |> Enum.map(fn [min, max, char, pass] ->
-      min = Utils.to_int(min)
-      max = Utils.to_int(max)
-      <<char>> = char
-      pass = to_charlist(pass)
-      [min, max, char, pass]
-    end)
+    input =
+      input
+      |> Utils.to_strings()
+      |> Enum.map(&Regex.run(@regex, &1, capture: :all_but_first))
+      |> Enum.map(fn [min, max, char, pass] ->
+        min = Utils.to_int(min)
+        max = Utils.to_int(max)
+        <<char>> = char
+        pass = to_charlist(pass)
+        [min, max, char, pass]
+      end)
 
-    part_1 = Enum.count(input, fn [min, max, char, pass] ->
-      count = Enum.count(pass, &(&1 == char))
-      min <= count and count <= max
-    end)
+    part_1 =
+      Enum.count(input, fn [min, max, char, pass] ->
+        count = Enum.count(pass, &(&1 == char))
+        min <= count and count <= max
+      end)
 
-    part_2 = Enum.count(input, fn [first, second, char, pass] ->
-      p = Enum.at(pass, first - 1) == char
-      q = Enum.at(pass, second - 1) == char
-      (p or q) and !(p and q)
-    end)
-    
+    part_2 =
+      Enum.count(input, fn [first, second, char, pass] ->
+        p = Enum.at(pass, first - 1) == char
+        q = Enum.at(pass, second - 1) == char
+        (p or q) and !(p and q)
+      end)
+
     {part_1, part_2}
   end
 end

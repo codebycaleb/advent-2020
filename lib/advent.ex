@@ -58,4 +58,23 @@ defmodule Advent do
 
     File.write!("README.md", buffer)
   end
+
+  def get(i) do
+    path = "assets/inputs/#{if i < 10, do: "0" <> <<i + 48>>, else: <<i + 48>>}.txt"
+
+    if File.exists?(path) do
+      IO.puts("Already here!")
+    else
+      Application.ensure_all_started(:inets)
+      Application.ensure_all_started(:ssl)
+      url = 'https://adventofcode.com/2020/day/' ++ [i + 48] ++ '/input'
+      cookie = 'session=' ++ to_charlist(System.get_env("ADVENT_COOKIE"))
+
+      {:ok, {{_, 200, _}, _headers, body}} =
+        :httpc.request(:get, {url, [{'cookie', cookie}]}, [], [])
+
+      File.write!(path, to_string(body))
+      IO.puts("Copied!")
+    end
+  end
 end
