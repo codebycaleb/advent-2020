@@ -26,7 +26,7 @@ defmodule D3 do
   """
   @behaviour Day
 
-  def bin_at(bin, at) do
+  defp bin_at(bin, at) do
     mask = 1 <<< at
     mask == (bin &&& mask)
   end
