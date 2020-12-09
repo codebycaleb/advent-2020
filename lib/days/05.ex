@@ -40,21 +40,24 @@ defmodule D5 do
   """
   @behaviour Day
 
-  defp bin_search([], x..x), do: x
-
-  defp bin_search([hd | tl], min..max) when hd == ?F or hd == ?L,
-    do: bin_search(tl, min..(min + div(max - min, 2)))
-
-  defp bin_search([hd | tl], min..max) when hd == ?B or hd == ?R,
-    do: bin_search(tl, (max - div(max - min, 2))..max)
+  defp to_int(list) do
+    list
+    |> Enum.map(fn
+      ?B -> 1
+      ?F -> 0
+      ?L -> 0
+      ?R -> 1
+    end)
+    |> Integer.undigits(2)
+  end
 
   defp interpret_passes(input) do
     input
     |> Enum.map(fn pass ->
       <<row_string::binary-size(7), col_string::binary-size(3)>> = pass
-      row_string = to_charlist(row_string)
-      col_string = to_charlist(col_string)
-      Pass.new(bin_search(row_string, 0..127), bin_search(col_string, 0..7))
+      row = to_charlist(row_string)
+      col = to_charlist(col_string)
+      Pass.new(to_int(row), to_int(col))
     end)
   end
 
