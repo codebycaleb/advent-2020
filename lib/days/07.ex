@@ -1,5 +1,3 @@
-alias PriorityQueue, as: PQ
-
 defmodule D7 do
   @moduledoc """
   --- Day 7: Handy Haversacks ---
