@@ -34,7 +34,7 @@ defmodule D1 do
   @impl true
   def solve(input) do
     input = input |> Utils.to_ints() |> MapSet.new()
-    sums = for i <- input, j <- input, i + j < 2020 and i != j, do: i + j
+    sums = for i <- input, j <- input, i + j < 2020 and j > i, do: i + j
 
     part_1 = find(input, input)
     part_2 = find(input, sums)
